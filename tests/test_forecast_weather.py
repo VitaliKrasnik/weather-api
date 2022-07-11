@@ -13,6 +13,7 @@ class TestCurrentWeather():
     @pytest.mark.smoke
     @pytest.mark.parametrize("forecast_data", forecast_test_data)
     def test_forecast_weather(self, forecast_data, weather_api):
+        """Make sure weather forecast endpoint returns correct response when correct parameters were specified"""
         expected_forecast_city = forecast_data[0]
         expected_forecast_num_of_days = forecast_data[1]
         response = weather_api.get_weather_forecast(city=expected_forecast_city, days=expected_forecast_num_of_days)

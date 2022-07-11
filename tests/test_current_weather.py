@@ -13,6 +13,7 @@ class TestCurrentWeather():
     @pytest.mark.smoke
     @pytest.mark.parametrize("city", cities)
     def test_current_weather(self, city, weather_api):
+        """Make sure current weather endpoint returns correct response when correct parameters were specified"""
         response = weather_api.get_current_weather(city=city)
         response_body = response.json()
 
@@ -25,6 +26,7 @@ class TestCurrentWeather():
 
 
     def test_current_weather_empty_city_negative(self, weather_api):
+        """Make sure current weather endpoint returns correct response code in response body when city parameter is empty"""
         city = ""
         response = weather_api.get_current_weather(city=city)
         response_body = response.json()

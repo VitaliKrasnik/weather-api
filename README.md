@@ -1,5 +1,5 @@
 # pytest automation
-Back End API testing
+Weather API testing
 
 The Framework dependecies: 
   - Python 3.8

@@ -15,7 +15,17 @@ def env(pytestconfig):
     """Initialize the Weather API for the test session with given environment"""
     return pytestconfig.getoption('env')
 
-"""This function initializes Weather API Before Test starts"""
 @pytest.fixture(autouse=True, scope='session', name='weather_api')
 def initialize_white_hat_api(env):
-        return WeatherAPI(env=env)
+    """Initializes Weather API Before Test starts"""
+    return WeatherAPI(env=env)
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+
+    test_fn = item.obj
+    docstring = getattr(test_fn, '__doc__')
+    if docstring:
+        report.nodeid = docstring
